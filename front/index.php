@@ -62,10 +62,14 @@
 <!-- Campo de Busca dos produtos -->
 <style type="text/css">
 .resizedTextbox {width: 250px;  height: 40px; padding: 1px;padding:10px;border:1px solid blue; border-radius: 10px; font-size: 26px;}
+.resizedQuantidade {width: 100px;  height: 40px; padding: 1px;padding:10px;border:1px solid blue; border-radius: 10px; font-size: 26px;}
 </style>
 <!-- Fim do estilo de campo de Busca -->
 <!-- Script principal de Busca dinamicao do campo saida de produto -->
+<!-- Script para executar o form e recarregar mesma pagina -->
+<script type="text/javascript" src="js/script.js"></script>
 
+<!-- fim script ajax carregar mesma página -->
 <script type="text/javascript">
 $().ready(function() {
 	$("#course").autocomplete("get_front_a.php", {
@@ -152,17 +156,17 @@ $().ready(function() {
 <!-- INICIO DA LINHA 3 -->
 <div class="row">
 	<div class="grid_12">
-		<span class="example">
+		<span class="example" >
 
 		<div id="content">
-	<form autocomplete="off">
+	<form autocomplete="off" name="atualiza" method="POST"  action="atualiza.php"  >
 	
 			
 			<input tye="text" name="course" id="course"  class="resizedTextbox" /><!-- propriedade no corpo/Nesta Página mesmo -->
 		 <input type="text" name="tara" id="tara" class="resizedTextbox" /> <!-- propriedade no corpo/Nesta Página mesmo -->
-		
-	
-		<input type="submit" value="Submit" />
+		 <input type="text"   width="1px"   name="quantidade" id="quantidade" class="resizedQuantidade" /> <!-- propriedade no corpo/Nesta Página mesmo -->
+		<div id="response"></div>
+		<input type="submit" value="Submit"  name="course" id="sendform" />
 	</form>
 </div>
 		</span>	
