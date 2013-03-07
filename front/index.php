@@ -65,14 +65,15 @@
 .resizedQuantidade {width: 100px;  height: 40px; padding: 1px;padding:10px;border:1px solid blue; border-radius: 10px; font-size: 26px;}
 </style>
 <!-- Fim do estilo de campo de Busca -->
-<!-- Script principal de Busca dinamicao do campo saida de produto -->
+
 <!-- Script para executar o form e recarregar mesma pagina -->
 <script type="text/javascript" src="js/script.js"></script>
-
 <!-- fim script ajax carregar mesma página -->
+
+<!-- Script principal de Busca dinamicao do campo saida de produto -->
 <script type="text/javascript">
 $().ready(function() {
-	$("#course").autocomplete("get_front_a.php", {
+	$("#course").autocomplete("get_front_marca.php", {
 		width: 260,
 		matchContains: true,
 		//mustMatch: true,
@@ -84,7 +85,7 @@ $().ready(function() {
 	});
 });
 $().ready(function() {
-	$("#tara").autocomplete("get_front.php", {
+	$("#tara").autocomplete("get_front_tara.php", {
 		width: 260,
 		matchContains: true,
 		//mustMatch: true,
@@ -95,6 +96,34 @@ $().ready(function() {
 		selectFirst: false
 	});
 });
+$().ready(function() {
+	$("#idprodutos").autocomplete("get_front_id.php", {
+		width: 260,
+		selectFirst: false
+	});
+});
+
+function bucaId(){
+/*idAjax=send("&produto="+course.value+"&tara="+tara.value,"../teste.php");
+if(idAjax=="ERRO"){
+//ações caso busca retorne erro
+alert("errrrrrrrrrrrrrrroo");
+}else{
+//ações caso a busca dê certo
+alert(idAjax);
+} */
+
+$.ajax({	
+		type: "POST",
+		url: "../teste.php",
+		data: "&produto="+course.value+"&tara="+tara.value,
+		cache: false,
+		success: function(html){
+		exemplo.value=html;
+	}
+	});
+
+}
 </script>
 
 <!-- FIM do script principal de busca dinamica -->
@@ -159,15 +188,16 @@ $().ready(function() {
 		<span class="example" >
 
 		<div id="content">
-	<form autocomplete="off" name="atualiza" method="POST"  action="atualiza.php"  >
 	
 			
-			<input tye="text" name="course" id="course"  class="resizedTextbox" /><!-- propriedade no corpo/Nesta Página mesmo -->
-		 <input type="text" name="tara" id="tara" class="resizedTextbox" /> <!-- propriedade no corpo/Nesta Página mesmo -->
-		 <input type="text"   width="1px"   name="quantidade" id="quantidade" class="resizedQuantidade" /> <!-- propriedade no corpo/Nesta Página mesmo -->
+			<input tye="text" name="course" id="course" class="resizedTextbox" /><!-- propriedade no corpo/Nesta Página mesmo -->
+		 <input type="text" onBlur="bucaId()" name="tara" id="tara" class="resizedTextbox" /> <!-- propriedade no corpo/Nesta Página mesmo -->
+		 <input type="text"   width="1px"  name="quantidade" id="quantidade" class="resizedQuantidade" /> <!-- propriedade no corpo/Nesta Página mesmo -->
+		<input type="hidden" name="idprodutos" id="idprodutos"/>		
+		<input type="text" id="exemplo">
 		<div id="response"></div>
-		<input type="submit" value="Submit"  name="course" id="sendform" />
-	</form>
+		<input type="submit" value="Submit"  name="envia" id="sendform" />
+	
 </div>
 		</span>	
 
